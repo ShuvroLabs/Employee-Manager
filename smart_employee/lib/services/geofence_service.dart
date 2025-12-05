@@ -8,6 +8,7 @@
 // - Syncing geofences with Firestore
 
 import 'dart:async';
+import 'dart:math' as math;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
@@ -308,69 +309,15 @@ class GeofenceService {
     final double dLon = _toRadians(lon2 - lon1);
 
     final double a = 
-        (sin(dLat / 2) * sin(dLat / 2)) +
-        (cos(_toRadians(lat1)) * cos(_toRadians(lat2)) *
-            sin(dLon / 2) * sin(dLon / 2));
+        (math.sin(dLat / 2) * math.sin(dLat / 2)) +
+        (math.cos(_toRadians(lat1)) * math.cos(_toRadians(lat2)) *
+            math.sin(dLon / 2) * math.sin(dLon / 2));
 
-    final double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    final double c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
     return earthRadius * c;
   }
 
-  double _toRadians(double degree) => degree * (pi / 180);
-
-  // Math helpers (avoiding dart:math import issues)
-  static double sin(double x) => _sin(x);
-  static double cos(double x) => _cos(x);
-  static double sqrt(double x) => _sqrt(x);
-  static double atan2(double a, double b) => _atan2(a, b);
-  static const double pi = 3.14159265358979323846;
-
-  // These will use dart:math internally
-  static double _sin(double x) {
-    // Taylor series approximation
-    x = x % (2 * pi);
-    double result = x;
-    double term = x;
-    for (int i = 1; i <= 10; i++) {
-      term *= -x * x / ((2 * i) * (2 * i + 1));
-      result += term;
-    }
-    return result;
-  }
-
-  static double _cos(double x) {
-    return _sin(x + pi / 2);
-  }
-
-  static double _sqrt(double x) {
-    if (x <= 0) return 0;
-    double guess = x / 2;
-    for (int i = 0; i < 20; i++) {
-      guess = (guess + x / guess) / 2;
-    }
-    return guess;
-  }
-
-  static double _atan2(double y, double x) {
-    if (x > 0) return _atan(y / x);
-    if (x < 0 && y >= 0) return _atan(y / x) + pi;
-    if (x < 0 && y < 0) return _atan(y / x) - pi;
-    if (x == 0 && y > 0) return pi / 2;
-    if (x == 0 && y < 0) return -pi / 2;
-    return 0;
-  }
-
-  static double _atan(double x) {
-    // Approximation
-    double result = 0;
-    double term = x;
-    for (int i = 0; i < 20; i++) {
-      int n = 2 * i + 1;
-      result += ((i % 2 == 0) ? 1 : -1) * term / n;
-      term *= x * x;
-    }
-    return result;
-  }
+  double _toRadians(double degree) => degree * (math.pi / 180);
 
   /// Save geofence to local storage
   Future<void> _saveToLocal(GeofenceModel geofence) async {

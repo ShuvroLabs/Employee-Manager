@@ -16,6 +16,23 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+// UUID v4 generator
+class UuidGenerator {
+  static final Random _random = Random.secure();
+
+  static String generate() {
+    // Generate UUID v4 format: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+    final bytes = List<int>.generate(16, (_) => _random.nextInt(256));
+
+    // Set version (4) and variant (8, 9, A, or B)
+    bytes[6] = (bytes[6] & 0x0f) | 0x40; // Version 4
+    bytes[8] = (bytes[8] & 0x3f) | 0x80; // Variant
+
+    final hex = bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+    return '${hex.substring(0, 8)}-${hex.substring(8, 12)}-${hex.substring(12, 16)}-${hex.substring(16, 20)}-${hex.substring(20)}';
+  }
+}
+
 /// Demo data seeder
 /// 
 /// This generates JSON files that can be imported into Firestore
@@ -295,7 +312,6 @@ class DemoDataSeeder {
   }
 
   String _generateId() {
-    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    return List.generate(20, (_) => chars[_random.nextInt(chars.length)]).join();
+    return UuidGenerator.generate();
   }
 }

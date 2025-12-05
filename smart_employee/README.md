@@ -96,7 +96,9 @@ lib/
    flutterfire configure
    ```
    
-   This will generate `lib/config/firebase_options.dart` with your project's configuration.
+   This will replace the placeholder `lib/config/firebase_options.dart` with your project's actual configuration.
+   
+   > **Note:** The included `firebase_options.dart` contains placeholder values to allow compilation. The app won't connect to Firebase until you run `flutterfire configure` to generate the real configuration.
 
 4. **Configure Google Maps**
    
