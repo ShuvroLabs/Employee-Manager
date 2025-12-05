@@ -1,0 +1,11 @@
+# local.properties.template
+# Copy this file to local.properties and fill in the values
+
+# Flutter SDK path - automatically set by Flutter
+# flutter.sdk=/path/to/flutter
+
+# Android SDK path - automatically set by Android Studio
+# sdk.dir=/path/to/android/sdk
+
+# Google Maps API Key for Android
+# MAPS_API_KEY=your_google_maps_api_key
