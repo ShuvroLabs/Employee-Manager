@@ -79,12 +79,24 @@ lib/
    cd Employee-Manager/smart_employee
    ```
 
-2. **Install dependencies**
+2. **Regenerate Flutter project scaffolding** (IMPORTANT - Required for first-time setup)
+   ```bash
+   # This regenerates the missing Flutter infrastructure files (android gradle wrapper, etc.)
+   flutter create . --org com.example --project-name smart_employee
+   ```
+   
+   This command will:
+   - Generate missing Android gradle files (`gradlew`, `gradle-wrapper.jar`, etc.)
+   - Create/update local.properties with your Flutter SDK path
+   - Generate iOS xcodeproj files
+   - Preserve your existing Dart code and custom native implementations
+
+3. **Install dependencies**
    ```bash
    flutter pub get
    ```
 
-3. **Configure Firebase**
+4. **Configure Firebase**
    
    Install FlutterFire CLI:
    ```bash
@@ -100,7 +112,7 @@ lib/
    
    > **Note:** The included `firebase_options.dart` contains placeholder values to allow compilation. The app won't connect to Firebase until you run `flutterfire configure` to generate the real configuration.
 
-4. **Configure Google Maps**
+5. **Configure Google Maps**
    
    Add your Google Maps API key to `android/app/src/main/AndroidManifest.xml`:
    ```xml
@@ -109,7 +121,7 @@ lib/
        android:value="YOUR_GOOGLE_MAPS_API_KEY"/>
    ```
 
-5. **Register Android SHA1**
+6. **Register Android SHA1**
    
    Get your SHA1 fingerprint:
    ```bash
@@ -119,7 +131,7 @@ lib/
    
    Add the SHA1 to your Firebase project settings.
 
-6. **Run the app**
+7. **Run the app**
    ```bash
    flutter run
    ```

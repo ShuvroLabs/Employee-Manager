@@ -9,6 +9,16 @@ This checklist contains manual steps required to fully configure the Smart Emplo
 - [ ] Google Cloud Console account
 - [ ] Firebase account
 
+## 🔧 Initial Project Setup (IMPORTANT - Do this first!)
+
+### Regenerate Flutter Scaffolding
+- [ ] Navigate to project: `cd Employee-Manager/smart_employee`
+- [ ] Run: `flutter create . --org com.example --project-name smart_employee`
+- [ ] This generates missing Android/iOS files while preserving existing code
+- [ ] Run: `flutter pub get`
+
+> **Note:** This step is required because the repository contains custom source code without Flutter's generated infrastructure files (like gradle wrapper, xcodeproj, etc.). Running `flutter create .` regenerates these while preserving your Dart code and native implementations.
+
 ## 🔥 Firebase Setup
 
 ### Project Creation
@@ -156,19 +166,24 @@ This checklist contains manual steps required to fully configure the Smart Emplo
 
 ### Common Issues
 
-1. **"google-services.json not found"**
+1. **"Build failed due to use of deleted Android v1 embedding"**
+   - This means Flutter infrastructure files are missing
+   - Run: `flutter create . --org com.example --project-name smart_employee`
+   - Then: `flutter pub get`
+
+2. **"google-services.json not found"**
    - Download from Firebase Console → Project Settings → Android app
 
-2. **"SHA1 fingerprint mismatch"**
+3. **"SHA1 fingerprint mismatch"**
    - Re-run `./gradlew signingReport` and update Firebase
 
-3. **"Location permission denied"**
+4. **"Location permission denied"**
    - Go to app settings → Permissions → Location → Allow all the time
 
-4. **"Firebase initialization failed"**
+5. **"Firebase initialization failed"**
    - Ensure `firebase_options.dart` exists and is correctly generated
 
-5. **"Build failed - Gradle error"**
+6. **"Build failed - Gradle error"**
    - Try `cd android && ./gradlew clean` then rebuild
 
 ### Support Resources

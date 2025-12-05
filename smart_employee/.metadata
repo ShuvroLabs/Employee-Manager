@@ -1,0 +1,38 @@
+# This file tracks properties of this Flutter project.
+# Used by Flutter tool to assess capabilities and perform upgrades etc.
+#
+# This file should be version controlled and should not be manually edited.
+
+version:
+  revision: "a5cb96369ef86c7e85abf5d662a1ca5d89775053"
+  channel: "stable"
+
+project_type: app
+
+# Tracks metadata for the flutter migrate command
+migration:
+  platforms:
+    - platform: root
+      create_revision: a5cb96369ef86c7e85abf5d662a1ca5d89775053
+      base_revision: a5cb96369ef86c7e85abf5d662a1ca5d89775053
+    - platform: android
+      create_revision: a5cb96369ef86c7e85abf5d662a1ca5d89775053
+      base_revision: a5cb96369ef86c7e85abf5d662a1ca5d89775053
+
+  # User provided section
+
+  # List of Local Coverage Paths
+  # (untracked paths in your source control)
+  # paths:
+
+  # List of Local Plugins
+  # (untracked plugins)
+  # plugins:
+
+  # List of Local Overrides
+  # (untracked local overrides)
+  # overrides:
+
+  # This is displayed whenever an adb hierarchyViewer is opened
+  # (not in version control)
+  # version: 1.0.0
